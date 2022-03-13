@@ -30,8 +30,8 @@
 | delivery_charge_id | integer    | null: false                    |
 | prefectures_id     | integer    | null: false                    |
 | days_id            | integer    | null: false                    |
-| category_id        | integer    | null: false, foreign_key: true |
-| price              | string     | null: false                    |
+| category_id        | integer    | null: false                    |
+| price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
@@ -69,7 +69,7 @@
 
 - belongs_to :purchase
 
-## comment テーブル
+## comments テーブル
 
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
