@@ -3,6 +3,7 @@ class Article < ApplicationRecord
   belongs_to :category
   belongs_to :status
   belongs_to :delivery_charge
+  belongs_to :prefectures
 
   validates :title, :text, presence: true
 
