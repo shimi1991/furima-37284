@@ -4,6 +4,7 @@ class Article < ApplicationRecord
   belongs_to :status
   belongs_to :delivery_charge
   belongs_to :prefectures
+  belongs_to :days
 
   validates :title, :text, presence: true
 
