@@ -78,6 +78,18 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price out of setting range")
       end
+
+      it "priceに半角数字以外が含まれている場合は出品できない" do
+        @item.price = "abcde"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price out of setting range")
+      end
+
+      it 'userが紐付いていないと保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
+      end
     end
   end
 end
