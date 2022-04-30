@@ -56,6 +56,10 @@ class ItemsController < ApplicationController
     unless current_user.id == @item.user_id
       redirect_to action: :index
     end
+
+    if @item.purchase.present?
+      redirect_to action: :index
+    end
   end
 
 end
