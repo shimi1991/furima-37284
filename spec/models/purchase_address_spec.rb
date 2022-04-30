@@ -42,6 +42,12 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Post code can't be blank", "Post code is invalid")
       end
 
+      it "post_codeに半角ハイフンがないと保存できない" do
+        @purchase_address.post_code = 1234567
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Post code is invalid")
+      end
+
       it "prefectures_idが---だと保存できない" do
         @purchase_address.prefectures_id = 1
         @purchase_address.valid?
@@ -64,6 +70,24 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.phone_number = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
+      end
+
+      it "phone_numberが9桁以下だと保存できない" do
+        @purchase_address.phone_number = 123456789
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+      end
+
+      it "phone_numberが12桁以上だと保存できない" do
+        @purchase_address.phone_number = 123456789012
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
+
+      it "phone_numberに半角以外が含まれていると保存できない" do
+        @purchase_address.phone_number = "123456789a1"
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid")
       end
     end
   end
